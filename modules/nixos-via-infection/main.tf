@@ -108,7 +108,7 @@ data "cloudinit_config" "user_data" {
             # Users
             users = {
               mutableUsers = false;
-              users.root.openssh.authorizedKeys.keys = sshKeys;
+              users.root.openssh.authorizedKeys.keys = [ ${var.ssh_key} ];
               users.duncan = {
                 isNormalUser = true;
                 home = "/home/duncan";
@@ -117,7 +117,7 @@ data "cloudinit_config" "user_data" {
                   "docker"
                   "wheel"
                 ];
-                openssh.authorizedKeys.keys = ${var.ssh_key};
+                openssh.authorizedKeys.keys = [ ${var.ssh_key} ];
               };
             };
             security.sudo.wheelNeedsPassword = false;
